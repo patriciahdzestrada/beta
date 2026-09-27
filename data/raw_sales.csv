@@ -1,0 +1,6 @@
+id,fecha,producto,cantidad,precio_unitario,cliente_id
+1,2026-09-01,Laptop,1,1200.00,101
+2,2026-09-01,Mouse,2,25.50,102
+3,2026-09-02,Teclado,1,45.00,101
+4,2026-09-02,Laptop,1,1200.00,103
+5,2026-09-03,Monitor,2,300.00,102

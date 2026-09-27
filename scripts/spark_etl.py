@@ -2,6 +2,7 @@ import os
 import duckdb
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
+from pathlib import Path
 
 def run_etl():
     # 1. Inicializar sesión de PySpark
@@ -11,7 +12,18 @@ def run_etl():
         .getOrCreate()
 
     # 2. Leer archivo CSV
-    raw_path = os.path.join("data", "raw_sales.csv")
+    #raw_path = os.path.join("data", "raw_sales.csv")
+
+
+    BASE_DIR = Path(__file__).resolve().parent.parent
+
+    raw_path = str(BASE_DIR / "data" / "raw_sales.csv")
+
+    df = spark.read.csv(
+        raw_path,
+        header=True,
+        inferSchema=True
+    )
     df = spark.read.csv(raw_path, header=True, inferSchema=True)
 
     # 3. Limpieza y transformación pesada con PySpark

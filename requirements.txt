@@ -1,0 +1,6 @@
+pyspark==4.2.0
+duckdb==1.5.5
+dbt-core==1.12.5
+dbt-duckdb==1.11.0
+pytest==8.0.2
+pandas==2.2.1

@@ -1,4 +1,6 @@
 colorama==0.4.6
+dbt-core
+dbt-duckdb
 duckdb==1.5.5
 iniconfig==2.3.0
 numpy==2.2.6

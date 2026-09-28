@@ -3,7 +3,7 @@ duckdb==1.5.5
 iniconfig==2.3.0
 numpy==2.2.6
 packaging==26.3
-pandas==3.0.6
+pandas==2.2.3
 pluggy==1.6.0
 py4j==0.10.9.9
 Pygments==2.21.0

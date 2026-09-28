@@ -3,6 +3,7 @@ import duckdb
 import pytest
 from scripts.spark_etl import run_etl
 
+
 def test_spark_etl_pipeline(tmp_path):
     """
     Prueba unitaria para verificar que el pipeline de PySpark ejecuta correctamente

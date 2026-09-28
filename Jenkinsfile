@@ -1,46 +1,48 @@
+```groovy
 pipeline {
     agent any
 
+    environment {
+        DOCKER = 'C:\\Users\\mauri\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe'
+    }
+
     stages {
+
         stage('Build Docker Image') {
             steps {
-                script {
-                    sh 'docker build -t pyspark-dbt-runner .'
-                }
+                bat "\"${DOCKER}\" build -t pyspark-dbt-runner ."
             }
         }
 
         stage('PySpark ETL & Tests') {
             steps {
-                script {
-                    sh '''
-                    docker run --rm \
-                      -v ${WORKSPACE}:/app \
-                      pyspark-dbt-runner \
-                      pytest tests/
-                    '''
-                    
-                    sh '''
-                    docker run --rm \
-                      -v ${WORKSPACE}:/app \
-                      pyspark-dbt-runner \
-                      python scripts/spark_etl.py
-                    '''
-                }
+
+                bat """
+                    "${DOCKER}" run --rm ^
+                    -v "%WORKSPACE%:/app" ^
+                    pyspark-dbt-runner ^
+                    pytest tests/
+                """
+
+                bat """
+                    "${DOCKER}" run --rm ^
+                    -v "%WORKSPACE%:/app" ^
+                    pyspark-dbt-runner ^
+                    python scripts/spark_etl.py
+                """
             }
         }
 
         stage('dbt Transformations & Tests') {
             steps {
-                script {
-                    sh '''
-                    docker run --rm \
-                      -v ${WORKSPACE}:/app \
-                      -w /app/dbt_project \
-                      pyspark-dbt-runner \
-                      bash -c "dbt run --profiles-dir . && dbt test --profiles-dir ."
-                    '''
-                }
+
+                bat """
+                    "${DOCKER}" run --rm ^
+                    -v "%WORKSPACE%:/app" ^
+                    -w /app/dbt_project ^
+                    pyspark-dbt-runner ^
+                    bash -c "dbt run --profiles-dir . && dbt test --profiles-dir ."
+                """
             }
         }
     }
@@ -51,3 +53,4 @@ pipeline {
         }
     }
 }
+```

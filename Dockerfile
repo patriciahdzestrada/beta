@@ -2,7 +2,7 @@ FROM python:3.10-slim
 
 # Instalar Java 17 (Requerido para PySpark)
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jre-headless git && \
+    apt-get install -y openjdk-21-jre-headless git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

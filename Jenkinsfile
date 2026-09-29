@@ -19,16 +19,17 @@ pipeline {
                 bat """
                     "${DOCKER}" run --rm ^
                         -v "%WORKSPACE%:/app" ^
-                        -e PYTHONPATH=/app ^
+                        -e PYTHONPATH=/app:/opt/spark/python:/opt/spark/python/lib/py4j-0.10.9.5-src.zip ^
                         pyspark-dbt-runner ^
                         pytest tests/
                 """
 
                 bat """
                     "${DOCKER}" run --rm ^
-                    -v "%WORKSPACE%:/app" ^
-                    pyspark-dbt-runner ^
-                    python scripts/spark_etl.py
+                        -v "%WORKSPACE%:/app" ^
+                        -e PYTHONPATH=/app:/opt/spark/python:/opt/spark/python/lib/py4j-0.10.9.5-src.zip ^
+                        pyspark-dbt-runner ^
+                        python scripts/spark_etl.py
                 """
             }
         }
@@ -38,10 +39,10 @@ pipeline {
 
                 bat """
                     "${DOCKER}" run --rm ^
-                    -v "%WORKSPACE%:/app" ^
-                    -w /app/dbt_project ^
-                    pyspark-dbt-runner ^
-                    bash -c "dbt run --profiles-dir . && dbt test --profiles-dir ."
+                        -v "%WORKSPACE%:/app" ^
+                        -w /app/dbt_project ^
+                        pyspark-dbt-runner ^
+                        bash -c "dbt run --profiles-dir . && dbt test --profiles-dir ."
                 """
             }
         }
@@ -53,4 +54,3 @@ pipeline {
         }
     }
 }
-

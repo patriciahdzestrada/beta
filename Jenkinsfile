@@ -18,10 +18,10 @@ pipeline {
 
                 bat """
                     "${DOCKER}" run --rm ^
-                    -v "%WORKSPACE%:/app" ^
-                    -e PYTHONPATH=/app ^
-                    pyspark-dbt-runner ^
-                    pytest tests/
+                        -v "%WORKSPACE%:/app" ^
+                        -e PYTHONPATH=/app ^
+                        pyspark-dbt-runner ^
+                        pytest tests/
                 """
 
                 bat """

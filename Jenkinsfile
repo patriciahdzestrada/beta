@@ -29,7 +29,7 @@ pipeline {
                         -v "%WORKSPACE%:/app" ^
                         -e PYTHONPATH=/app:/opt/spark/python ^
                         pyspark-dbt-runner ^
-                        python scripts/spark_etl.py
+                        python3 scripts/spark_etl.py
                 """
             }
         }

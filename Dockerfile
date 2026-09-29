@@ -1,17 +1,12 @@
-FROM python:3.10-slim
+FROM apache/spark-py:v3.4.0
 
-# Instalar Java 17 (Requerido para PySpark)
-RUN apt-get update && \
-    apt-get install -y openjdk-21-jre-headless git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+USER root
 
 WORKDIR /app
 
+# Copiar e instalar las dependencias restantes (dbt, duckdb, pytest, etc.)
 COPY requirements.txt .
-RUN pip install --default-timeout=300 --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 

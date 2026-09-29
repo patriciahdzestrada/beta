@@ -9,7 +9,6 @@ pandas==2.2.3
 pluggy==1.6.0
 py4j==0.10.9.9
 Pygments==2.21.0
-pyspark==4.2.0
 pyarrow==18.1.0
 pytest==9.1.1
 python-dateutil==2.9.0.post0

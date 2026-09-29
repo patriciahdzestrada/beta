@@ -19,7 +19,7 @@ pipeline {
                 bat """
                     "${DOCKER}" run --rm ^
                         -v "%WORKSPACE%:/app" ^
-                        -e PYTHONPATH=/app:/opt/spark/python:/opt/spark/python/lib/py4j-0.10.9.5-src.zip ^
+                        -e PYTHONPATH=/app:/opt/spark/python
                         pyspark-dbt-runner ^
                         pytest tests/
                 """
@@ -27,7 +27,7 @@ pipeline {
                 bat """
                     "${DOCKER}" run --rm ^
                         -v "%WORKSPACE%:/app" ^
-                        -e PYTHONPATH=/app:/opt/spark/python:/opt/spark/python/lib/py4j-0.10.9.5-src.zip ^
+                        -e PYTHONPATH=/app:/opt/spark/python
                         pyspark-dbt-runner ^
                         python scripts/spark_etl.py
                 """
